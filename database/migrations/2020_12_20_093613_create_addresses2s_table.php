@@ -13,12 +13,12 @@ class CreateAddresses2sTable extends Migration
      */
     public function up()
     {
-        Schema::create('addresses2s', function (Blueprint $table) {
+        Schema::create('customer_addresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('user_id');
+            $table->int('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('address');
-            $table->rememberToken();
+            //$table->rememberToken(); I think this should only be in users table
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateAddresses2sTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('addresses2s');
+        Schema::dropIfExists('customer_addresses');
     }
 }
